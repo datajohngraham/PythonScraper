@@ -31,6 +31,8 @@ os.environ['PATH'] = os.path.dirname(os.path.abspath(__file__)) + os.pathsep + o
 ######## ???? are you creating a variable called os.environ['PATH'] or are you telling python to reset the pathname of the directory?
 ########  right side is the asbolute path of the module, os.pathsep gives the way paths are separated in the OS,
 ######  for windows it's ;  and then the old_os_path from above
+#######  ????  seems like it will make a directory that is the location of this file and then the directory of the old path.   That would mean the old path was inside
+####### the directory where this file is?  That doesn't make sense
 base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #######   ?????   gets absolute path of the module, then get the directory of that absolute path.   why is it sent to dirname twice?
 if sys.platform == 'win32':
