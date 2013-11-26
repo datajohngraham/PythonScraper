@@ -46,6 +46,7 @@ export PATH
 
 # unset PYTHONHOME if set
 # this will fail if PYTHONHOME is set to the empty string (which is bad anyway)
+############what does it mean "set to empty string
 # could use `if (set -u; : $PYTHONHOME) ;` in bash
 if [ -n "$PYTHONHOME" ] ; then
     _OLD_VIRTUAL_PYTHONHOME="$PYTHONHOME"
@@ -71,6 +72,7 @@ fi
 # This should detect bash and zsh, which have a hash command that must
 # be called to get it to forget past commands.  Without forgetting
 # past commands the $PATH changes we made may not be respected
+################  what past commands are we forgetting?
 if [ -n "$BASH" -o -n "$ZSH_VERSION" ] ; then
     hash -r
 fi

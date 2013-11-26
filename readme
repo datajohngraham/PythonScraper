@@ -1,13 +1,15 @@
-JOHN GRAHAM's VERSION 2
+JOHN GRAHAM's VERSION 3
 This is the full cl_scrape_project, including experimental directories and 
 production tools.
 
 The project uses python 2.7.3 with a virtualenv used for installing beautifulsoup4
 
 The virtualenv also had cython and lxml.
+###cython lxml?
 
 In particular, the raspberry pi virtualenv has been made portable so a reconstruction
 is no longer necessary when switching between directories.
+
 
 the venv constructor script will construct a virtual environment in the
 local directory and pip install beautifulsoup4 in that virtual environment.
