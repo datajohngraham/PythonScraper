@@ -4,7 +4,6 @@ activate this virtualenv environment.
 ######  documentation says  It is different from the import statement in that it does not use the module administration — 
 ####it reads the file unconditionally and does not create a new module.
 ##### apparently reads the file using the namespace saved in the globals and local dictionaries  
-#####  in the execfile above, this_file is to be substitute with "activate_this.py"? 
 ######   ???   the second argument is supposed to be 'globals' meaning the dictionary of namespace.  why are you creating a dictionary out of this file.  
 #####  __file__.   you are setting __file__ equal to the full path name of the activate_this.py file we are in now.  
 
@@ -12,7 +11,7 @@ activate this virtualenv environment.
 This can be used when you must use an existing Python interpreter, not
 the virtualenv bin/python
 ####??? I thought the whole script below is meant to create a virtual environemnt.   Not to handle
-#### not a situation in which you cannot use a virtual env and must use the interpreter
+#### a situation in which you cannot use a virtual env and must use the interpreter
 """
 
 try:
