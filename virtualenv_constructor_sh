@@ -11,3 +11,9 @@ virtualenv venv
 pip install beautifulsoup4
 
 deactivate
+
+#####  acoording to this documentation below apparently is a python module for setting up directory isolated from the rest of the 
+#####  computer.  don't understand this concept
+#####  also don't understand how this is a python module when it's a bash command
+
+##### The venv module provides support for creating lightweight “virtual environments” with their own site directories, optionally isolated from system site directories. Each virtual environment has its own Python binary (allowing creation of environments with various Python versions) and can have its own independent set of installed Python packages in its site directories.
