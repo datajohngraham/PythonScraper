@@ -23,13 +23,19 @@ import os
 old_os_path = os.environ['PATH']
 #######   get's the path name of the home directory
 os.environ['PATH'] = os.path.dirname(os.path.abspath(__file__)) + os.pathsep + old_os_path
-########      os.pathsep gives the way paths are separated in the OS,  for windows it's ;
+########      gives you the asbolute path of the module, os.pathsep gives the way paths are separated in the OS,
+######  for windows it's ;  and then the old_os_path from above
 base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+#######   ?????   gets absolute path of the module, then get the directory of that absolute path.   why is it sent to dirname again?
 if sys.platform == 'win32':
     site_packages = os.path.join(base, 'Lib', 'site-packages')
+#######   os.path.join intelligently combines paths,  throwing away higher directories that would be redundant
 else:
     site_packages = os.path.join(base, 'lib', 'python%s' % sys.version[:3], 'site-packages')
+######  ??  seems to add on to end of string 'python' the first two element of sys.version.  why do this only if platform is not win32? 
+######  would sys.version[:3] return the python version, like '2.7' 
 prev_sys_path = list(sys.path)
+
 import site
 site.addsitedir(site_packages)
 sys.real_prefix = sys.prefix
