@@ -37,7 +37,7 @@ def json_db_importer ( db_filename ):
 def object_exporter ( json_db_dict,  project_name ):
 
     JsonExport.write( json_db_dict, project_name, project_name )
-
+#####  cannot find this method's documentation.   why does it require project name fro two separate arguments.  does it creat a python dictionary?
     return
 
 
@@ -60,21 +60,22 @@ def object_parser ( json_db_dict ):
         
         print each[0]  ## create a dict object for each[0]
         """ This is the name under which the object will be saved. """
-
+############  does dict object mean object as in oop or just a dict
 
         for item in each[1:]:
             """ here the object will be created for each piece of data """
-
+######### ? what is the data after the element in index 0?
 
 
             print item[0] # this is the data object captured
             # 1. separate, format, and assign all retrieved data object types
-            
+#############  item[0] corresponds to each[1]?             
             ###
             ### Latitude:
             ###
             if re.search("latitude", item[0]) == None:
                 latitude = "NA"
+############  
             else:
                 tail_latitude = re.split("data-latitude=\"", item[0], 1)
                 head_latitude = re.split("\" data-longitude=", tail_latitude[1], 1)
@@ -92,7 +93,6 @@ def object_parser ( json_db_dict ):
                 head_longitude = re.split("\" data-pid=", tail_longitude[1], 1)
                 longitude = head_longitude[0]
             print longitude, "longitude"
-            
             ###
             ### pid:
             ###
@@ -106,6 +106,7 @@ def object_parser ( json_db_dict ):
 
             ###
             ### supertitle -- end_url/title/sub-location
+#################  what is sub-location?
             ###
             tail_supertitle = re.split("<span class=\"pl\"> <span class=\"star\"></span> <a ", item[0], 1)
             head_supertitle = re.split("</a>", tail_supertitle[1], 1)
@@ -143,7 +144,8 @@ def object_parser ( json_db_dict ):
             ### because it will have to compare to the main location
             ### and give NA if the sub location is the same as the
             ### main location (basic case)
-            ###
+##################  what is sublocation?           
+ ###
             sub_loc_key_list = re.split("/", end_url)
             print sub_loc_key_list[1]
 
