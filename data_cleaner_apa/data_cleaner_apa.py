@@ -69,7 +69,9 @@ def object_parser ( json_db_dict ):
 
             print item[0] # this is the data object captured
             # 1. separate, format, and assign all retrieved data object types
-#############  item[0] corresponds to each[1]?             
+#############  item[0] corresponds to each[1]? 
+############   ?????  i notice a lot of print statements.  isn't this just printing to the console, not changing the dict 
+#############  of the data             
             ###
             ### Latitude:
             ###
