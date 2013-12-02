@@ -70,7 +70,9 @@ def extract_from_soup( target_url_soup ):
     # Iteratively extract the data into a list that goes to a dictionary.
     for each in target_url_soup.find_all('p'):
         ##  Filter this thing which gets caught in the craigslist data.
-        if each.a.string == "next 100 postings":
+#########???  what does the find all return,  why is it searching for 'p'.           
+	if each.a.string == "next 100 postings":
+#########???   what does .a do?   does .string turn it into a string?
             pass
         else:
             # Get the title, get none on an exception
@@ -83,6 +85,7 @@ def extract_from_soup( target_url_soup ):
             # Get the hyperlink, get none on an exception
             try:
                 #print str(each.a.get('href'))
+############### ?? .get gets the value of the key 'href'?
                 post_href = str(each.a.get('href'))
             except:
                 post_href = ""
@@ -100,7 +103,7 @@ def extract_from_soup( target_url_soup ):
                 # Use a regular expression to parse this data further
                 if re.match("\$", post_cost_info) is None:
                     post_info = str(post_cost_info).strip()
-
+################## we already ran .strip() on this,  what is running it again going to do?
                 else:
                     # If there is no /, assign as dollars.
                     if re.search("/", post_cost_info) is None:
@@ -112,7 +115,7 @@ def extract_from_soup( target_url_soup ):
                         cost_info_list = re.split('/', post_cost_info, 1 )
                         post_cost = str(cost_info_list[0]).strip().strip('$')
                         post_info = str(cost_info_list[1]).strip()
-            
+###################  could you add a block to catch posts that are per week, and then multiply post_cost by 4?            
             # Close the above try block for cost and info
             except:
                 pass                
@@ -123,6 +126,7 @@ def extract_from_soup( target_url_soup ):
                 #                    "itempn").string).strip().strip('()')
                 post_loc = str(each.find("span", 
                                          "itempn").string).strip().strip('()')
+################  why do you need to str() something .string 'ed    what does .string do?
             except:
                 post_loc = ""
         
@@ -151,7 +155,7 @@ def extract_from_soup( target_url_soup ):
     This tuple is used for MD5 generation because it excludes the unique 
     datetime attribute.  This would salt the MD5 and we want the md5 to 
     represent the data inside so we can detect duplicates.
-
+############## what does salt mean?  
     I have now also removed the href_list because of duplicate posts
     The likelihood of different people having the same title, cost, info, and
     location is still very low and won't affect data.
@@ -165,14 +169,19 @@ def extract_from_soup( target_url_soup ):
     # Generate a list of md5 keys from the data tuple, the md5s are the keys. 
     for each in extracted_data_tuple_nouniquetime:
         eachmd5 = md5.new()
+############# what does md5.new do? 
         eachmd5.update( str(each) )
-        md5_key_list.append( str( eachmd5.hexdigest() ) )
+############## what does .update do
 
+        md5_key_list.append( str( eachmd5.hexdigest() ) )
+#############???? .hexdigest()
     # Zip a tuple and convert into a dictionary for JSON extraction
     extracted_data_dict = dict( zip( md5_key_list, extracted_data_tuple ) )
-
+###############  how do you just turn a tuple into a dictionary?  do the two arguments of zip correspond to keys and values?   why are you zipping the 
+extracted_data_tuple instead of the nouniquetime one?   the md5 hash list is just for the nounique time one and is the keys for the tuple with all fields?  
     return ( extracted_data_dict )
-
+############## why are we using md5 hashes as keys?  why not just use a counter if the goal is to ensure uniequeness of keys. 
+#############  is it so we can quickly look up the key for a specific value?
 
 def url_mutator( iteration, base_url ):
     """
@@ -186,7 +195,8 @@ def url_mutator( iteration, base_url ):
     list based on the "iteration" integer passed if desired, but the true
     purpose of the mutator is to provide a space to generate successive URLs
     on the fly for appending successive webpages of data onto the dataset.
-    
+################# what does that mean?   what is iteration,  what is passing these iterations. i gather it's an integer
+###### does cragislti just have url's in intervals of a 100? 
     """
     # This case doesn't currently exist but just in case.
     if iteration == 0:
@@ -220,14 +230,15 @@ def loop_end_condition( new_dict, prev_dict ):
     
     ## This deepcopy will be the duplicate-purged copy of new_dict
     truncated_new_dict = copy.deepcopy( new_dict )
-
+############## what does deepcopy do?
     ## purge new_dict of any overlapping entries with prev_dict 
     ## using the md5 checksum dict key.
     for entry in new_dict:
+########## just going over keys?
         if entry in prev_dict:
             end_condition = True
             del truncated_new_dict[entry]
-            
+########### you didn't break out of the loop here so i assume it will check for all overlaps in the dictionary            
 
     return [ end_condition, truncated_new_dict, new_dict ]
 

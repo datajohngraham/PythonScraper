@@ -8,6 +8,8 @@
 
 # Untracked files: #
 ####################
+######### where is the gitignore command to make git not add these to tracked files.  is it because the file is called .gitignore 
+##### and whatever you put inside of it git ignores?
 *.pyc
 venv/
 pickle/

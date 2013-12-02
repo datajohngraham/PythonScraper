@@ -1,11 +1,12 @@
 import ScrapeIterator
-
+########  Scrapeiterator is a module created in this project.   Where is it initialized in python as a package so that it can be imported?  
 """
     This module will generate an instance of ScrapeIterator for each
     line of the config file.  Each line of the config file should represent
     a separate craigslist webpage that will be scraped as a cronjob per the
     specifications of the cl_scrape_cronjob project.
 
+ 
     This function allows the application to be extensible with the sizeable
     caveat that each instance is governed by its parser file, which is the
     third argument passed to the ScrapeInstanceClass object.
@@ -20,7 +21,7 @@ import ScrapeIterator
 
     Calling config_iterator( config_filename ) at the bottom bootstraps the 
     entire project.
-
+############ ?  does 'bootstrap' mean runs the project
     """
 
 config_filename = "cl_scrape_cronjob.cfg"
@@ -42,8 +43,8 @@ def config_iterator( config_filename ):
                                                 each[1],
                                                 each[2],
                                                 int(each[3]) )) 
-                                               
-        scrape_instance_list[-1].scrape_main_function( 
+#######  cannot find documentation on ScrapeIterator.scrape_iterator()                                                    
+        scrape_instance_list[-1].scrape_main_function(
                             scrape_instance_list[-1].project_name, 
                             scrape_instance_list[-1].project_target_url,
                             scrape_instance_list[-1].max_iterations )
